@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FollowMario : MonoBehaviour {
-	public GameObject Mario;
+public class CameraFollow : MonoBehaviour {
 	public float leftOffset;
+	public GameObject mario;
+
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		float marioPosX = Mario.transform.position.x;
-
-		this.transform.position = new Vector3(
-			marioPosX - this.leftOffset,
+		this.transform.position = new Vector3 (
+			this.mario.transform.position.x - this.leftOffset,
 			this.transform.position.y,
 			this.transform.position.z
 		);
