@@ -29,4 +29,16 @@ public class Mario : MonoBehaviour {
 			this.rb.AddForce(new Vector2(0F, this.jumpForce));
 		}
 	}
+
+	void OnCollisionEnter2D(Collision2D collision) {
+		GameObject collisionObject = collision.gameObject;
+
+		if(collisionObject.tag == "Mushroom") {
+			this.Grow ();
+		}
+	}
+
+	void Grow() {
+		this.size = "Big";
+	}
 }
