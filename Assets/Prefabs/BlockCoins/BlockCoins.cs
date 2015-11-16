@@ -20,18 +20,4 @@ public class BlockCoins : MonoBehaviour {
 	
 	}
 
-	void OnTriggerExit2D(Collider2D colider) {
-		if (this.coins > 0) {
-			if (colider.gameObject.tag == "Player") {
-				this.coins--;
-
-				if(this.coins == 0) {
-					this.anim.SetBool ("Enabled", false);
-					this.isEnabled = false;
-				}
-
-				Debug.Log("Nuevo Coin");
-			}
-		}
-	}
 }
