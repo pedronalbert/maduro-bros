@@ -5,7 +5,8 @@ public class BlockItem : MonoBehaviour {
 	private Animator animator;
 	public bool isEnabled = true;
 	public string item = "Mushroom";
-	public GameObject mushroom;
+	public float fireForce = 10F;
+	public GameObject mushroomItem;
 
 	// Use this for initialization
 	void Start () {
@@ -26,12 +27,12 @@ public class BlockItem : MonoBehaviour {
 		this.animator.SetBool("Enabled", false);
 
 		if(item == "Mushroom") {
-			GameObject newItem = Instantiate(mushroom, transform.position + transform.up * 2, transform.rotation) as GameObject;
+			GameObject newItem = Instantiate(this.mushroomItem, transform.position + transform.up * 10, transform.rotation) as GameObject;
 			Rigidbody2D newItemRb = newItem.GetComponent<Rigidbody2D>();
 
 			newItemRb.AddForce(new Vector2(
-				0F,
-				150F
+				Random.Range(-this.fireForce, this.fireForce), 
+				this.fireForce
 			));
 		}
 	}

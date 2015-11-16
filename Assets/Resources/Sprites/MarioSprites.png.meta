@@ -1,13 +1,13 @@
 fileFormatVersion: 2
 guid: 4520b4f1bd00761498f01ece4293147a
-timeCreated: 1447687969
+timeCreated: 1447701882
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: MarioMini_Stand
-    21300002: MarioMini_Walking_0
-    21300004: MarioMini_Walking_1
-    21300006: MarioMini_Walking_2
+    21300000: MarioSmall_Stand
+    21300002: MarioSmall_Walking_0
+    21300004: MarioSmall_Walking_1
+    21300006: MarioSmall_Walking_2
     21300008: MarioBig_Stand
   serializedVersion: 2
   mipmaps:
@@ -55,7 +55,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: MarioMini_Stand
+    - name: MarioSmall_Stand
       rect:
         serializedVersion: 2
         x: 82
@@ -65,7 +65,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: MarioMini_Walking_0
+    - name: MarioSmall_Walking_0
       rect:
         serializedVersion: 2
         x: 98
@@ -75,7 +75,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: MarioMini_Walking_1
+    - name: MarioSmall_Walking_1
       rect:
         serializedVersion: 2
         x: 115
@@ -85,7 +85,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: MarioMini_Walking_2
+    - name: MarioSmall_Walking_2
       rect:
         serializedVersion: 2
         x: 128
