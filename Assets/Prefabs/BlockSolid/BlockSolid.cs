@@ -13,17 +13,7 @@ public class BlockSolid : MonoBehaviour {
 
 	}
 
-	void OnTriggerExit2D(Collider2D colider) {
-		GameObject go = colider.gameObject;
-
-		if (go.tag == "Player") {
-			Mario mario = go.GetComponent<Mario>();
-
-			if(mario.size == "Small") {
-				Debug.Log ("Animar hacia arriba"); 
-			} else {
-				Destroy(this.gameObject);
-			}
-		}
+	public void DestroyBlock() {
+		Destroy(gameObject);
 	}
 }
