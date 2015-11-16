@@ -2,31 +2,38 @@
 using System.Collections;
 
 public class Mario : MonoBehaviour {
+	public string size = "Small"; 
 	public float moveSpeed = 15;
-	private Rigidbody2D rb;
-	public bool isGrounded;
 	public float jumpForce = 1300F;
-	public string size = "Small";  
+	public bool isGrounded;
+	public Sprite marioBigSprite;
+
+	//Private 
+	private Rigidbody2D rigidBody;
+	private BoxCollider2D boxCollider;
+	private MarioFoots marioFoots;
 	
 	// Use this for initialization
 	void Start () {
-		this.rb = this.GetComponent<Rigidbody2D>();
+		this.rigidBody = this.GetComponent<Rigidbody2D>();
+		this.boxCollider = this.GetComponent<BoxCollider2D>();
+		this.marioFoots = this.GetComponentInChildren<MarioFoots> ();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		float axisX = Input.GetAxis("Horizontal");
 		
-		this.rb.velocity = new Vector2(
+		this.rigidBody.velocity = new Vector2(
 			axisX * this.moveSpeed,
-			this.rb.velocity.y
+			this.rigidBody.velocity.y
 			);
 		
 		bool jump = Input.GetKey (KeyCode.Space);
 		
 		if (jump && this.isGrounded) {
 			this.isGrounded = false;
-			this.rb.AddForce(new Vector2(0F, this.jumpForce));
+			this.rigidBody.AddForce(new Vector2(0F, this.jumpForce));
 		}
 	}
 
@@ -40,5 +47,23 @@ public class Mario : MonoBehaviour {
 
 	void Grow() {
 		this.size = "Big";
+		this.SetBigCollider("Stand");
+		this.marioFoots.SetBigCollider("Stand");
+		this.GetComponent<SpriteRenderer> ().sprite = this.marioBigSprite;
+	}
+
+	void SetBigCollider(string mode = "Stand") {
+		Vector2 colliderOffset = new Vector2();
+		Vector2 colliderSize = new Vector2();
+
+		if (mode == "Stand") {
+			colliderOffset.x = 0;
+			colliderOffset.y = 0F;
+			colliderSize.x = 1F;
+			colliderSize.y = 3.2F;
+		}
+
+		this.boxCollider.offset = colliderOffset;
+		this.boxCollider.size = colliderSize;
 	}
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4520b4f1bd00761498f01ece4293147a
-timeCreated: 1447625137
+timeCreated: 1447687969
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,7 @@ TextureImporter:
     21300002: MarioMini_Walking_0
     21300004: MarioMini_Walking_1
     21300006: MarioMini_Walking_2
+    21300008: MarioBig_Stand
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 10
+  spritePixelsToUnits: 1
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
@@ -91,6 +92,16 @@ TextureImporter:
         y: 480
         width: 15
         height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: MarioBig_Stand
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 496
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
