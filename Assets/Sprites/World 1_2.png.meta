@@ -1,15 +1,13 @@
 fileFormatVersion: 2
-guid: bcc30c9727423f142b489cecd0a2370d
-timeCreated: 1447646682
+guid: 3554d4fc777e1f54182143636530a34f
+timeCreated: 1447642536
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: CoinsBlock_0
-    21300002: CoinsBlock_Disabled
-    21300004: CoinsBlock_1
-    21300006: CoinsBlock_2
-    21300008: BlockSolid
-    21300010: BlockSolid_Blue
+    21300000: World 1_2
+    21300002: World 1_2_0
+    21300004: World 1_2_Sub
+    21300006: World 1_2_End
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -33,7 +31,7 @@ TextureImporter:
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 2048
+  maxTextureSize: 8192
   textureSettings:
     filterMode: 0
     aniso: 16
@@ -56,63 +54,43 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: CoinsBlock_0
+    - name: World 1_2
       rect:
         serializedVersion: 2
-        x: 80
-        y: 128
-        width: 16
-        height: 16
+        x: 262
+        y: 229
+        width: 3072
+        height: 224
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CoinsBlock_Disabled
+    - name: World 1_2_0
       rect:
         serializedVersion: 2
-        x: 144
-        y: 128
-        width: 16
-        height: 16
+        x: 1
+        y: 229
+        width: 255
+        height: 224
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CoinsBlock_1
+    - name: World 1_2_Sub
       rect:
         serializedVersion: 2
-        x: 96
-        y: 128
-        width: 16
-        height: 16
+        x: 1
+        y: 3
+        width: 256
+        height: 224
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: CoinsBlock_2
+    - name: World 1_2_End
       rect:
         serializedVersion: 2
-        x: 112
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BlockSolid
-      rect:
-        serializedVersion: 2
-        x: 272
-        y: 128
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: BlockSolid_Blue
-      rect:
-        serializedVersion: 2
-        x: 272
-        y: 112
-        width: 16
-        height: 16
+        x: 261
+        y: 3
+        width: 608
+        height: 224
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
