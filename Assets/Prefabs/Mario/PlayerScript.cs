@@ -6,12 +6,15 @@ public class PlayerScript : MonoBehaviour {
 	public float moveSpeed = 15;
 	public float jumpForce = 1300F;
 	public bool isGrounded;
+	public bool isInvulnerable = false;
 	
 
 	//Private 
 	private Rigidbody2D rigidBody;
 	private BoxCollider2D boxCollider;
 	private Animator animator;
+	private float lastTimeJump = -1;
+	private float timeBetweenJumps = 0.20F;
 	
 	// Use this for initialization
 	void Start () {
@@ -33,10 +36,10 @@ public class PlayerScript : MonoBehaviour {
 
 		this.animator.SetFloat("Speed", axisX * this.moveSpeed);
 		
-		bool jump = Input.GetKey (KeyCode.Space);
-		
-		if (jump && this.isGrounded) {
-			this.rigidBody.AddForce(new Vector2(0F, this.jumpForce));
+		bool inputJump = Input.GetKey (KeyCode.Space);
+
+		if (inputJump) {
+			this.Jump();
 		}
 	}
 
@@ -50,6 +53,17 @@ public class PlayerScript : MonoBehaviour {
 		this.size = "Small";
 		this.SetSmallCollider();
 		this.animator.SetTrigger("Shrink");
+	}
+
+	void Jump() {
+		float actualTime = Time.time;
+
+		if (this.isGrounded) {
+			if ((actualTime - this.lastTimeJump) >= this.timeBetweenJumps) {
+				this.lastTimeJump = actualTime;
+				this.rigidBody.AddForce (new Vector2 (0F, this.jumpForce));
+			}
+		}	
 	}
 
 	void SetBigCollider(string mode = "Stand") {
@@ -73,16 +87,20 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	public void Damage() {
-		if (this.size == "Big") {
-			this.Shrink ();
-		} else {
-			Destroy (this.gameObject);
+		if (!this.isInvulnerable) {
+			if (this.size == "Big") {
+				this.isInvulnerable = true;
+				this.Shrink ();
+				StartCoroutine("RemoveInvulnerable", 3F);
+			} else {
+				Destroy (this.gameObject);
+			}
 		}
 	}
 
-	public void newMushroom() {
-		if (this.size == "Small") {
-			this.Grow ();
+	public void OnItemCollected(string name) {
+		if (name == "Mushroom") {
+			this.Grow();
 		}
 	}
 
@@ -97,16 +115,25 @@ public class PlayerScript : MonoBehaviour {
 		RaycastHit2D rcHit = Physics2D.Raycast (
 			raycastOrigin,
 			Vector2.right,
-			raycastDist
+			raycastDist,
+			1 << LayerMask.NameToLayer("Floor")
 		);
 
-		if (rcHit.collider == null) {
-			this.isGrounded = false;
-			this.animator.SetBool("IsGrounded", false);
-		} else {
+		if (rcHit.collider != null && this.rigidBody.velocity.y == 0) {
 			this.isGrounded = true;
 			this.animator.SetBool("IsGrounded", true);
+		} else {
+			this.isGrounded = false;
+			this.animator.SetBool("IsGrounded", false);
 		}
 
 	}
+
+	IEnumerator RemoveInvulnerable(float seconds) {
+		Debug.Log (seconds);
+		yield return new WaitForSeconds (seconds);
+
+		this.isInvulnerable = false;
+	}
+
 }

@@ -23,7 +23,7 @@ public class Mushroom : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.gameObject.tag == "Player") {
-			this.playerScript.newMushroom();
+			this.playerScript.OnItemCollected("Mushroom");
 			Destroy(this.gameObject);
 		}
 	}

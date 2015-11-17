@@ -31,7 +31,7 @@ public class BlockItem : MonoBehaviour {
 			Rigidbody2D newItemRb = newItem.GetComponent<Rigidbody2D>();
 
 			newItemRb.AddForce(new Vector2(
-				Random.Range(-this.fireForce, this.fireForce), 
+				Random.Range(-this.fireForce, this.fireForce) / 2, 
 				this.fireForce
 			));
 		}
