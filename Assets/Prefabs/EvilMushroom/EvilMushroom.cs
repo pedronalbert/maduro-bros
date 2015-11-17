@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EvilMushroom : MonoBehaviour {
-	private Mario mario;
+	private GameObject player;
 	public bool isAlive = true;
 	private Animator animator;
 	private BoxCollider2D boxCollider;
@@ -13,9 +13,11 @@ public class EvilMushroom : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		this.player = GameObject.FindWithTag("Player");
+
 		Physics2D.IgnoreCollision(
 			this.GetComponent<BoxCollider2D> (),
-			GameObject.Find ("Mario").GetComponent<BoxCollider2D>()
+			this.player.GetComponent<BoxCollider2D>()
 		);
 
 		this.animator = this.GetComponent<Animator>();

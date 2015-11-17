@@ -17,9 +17,9 @@ public class BlockSolidHit : MonoBehaviour {
 		GameObject go = colider.gameObject;
 		
 		if (go.tag == "Player") {
-			Mario mario = go.GetComponent<Mario>();
+			PlayerScript playerScript = go.GetComponent<PlayerScript>();
 			
-			if(mario.size == "Small") {
+			if(playerScript.size == "Small") {
 				Debug.Log ("Animar hacia arriba"); 
 			} else {
 				this.blockParent.DestroyBlock();

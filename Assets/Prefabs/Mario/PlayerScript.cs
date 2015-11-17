@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Mario : MonoBehaviour {
+public class PlayerScript : MonoBehaviour {
 	public string size = "Small"; 
 	public float moveSpeed = 15;
 	public float jumpForce = 1300F;
@@ -11,19 +11,19 @@ public class Mario : MonoBehaviour {
 	//Private 
 	private Rigidbody2D rigidBody;
 	private BoxCollider2D boxCollider;
-	private MarioFoots marioFoots;
 	private Animator animator;
 	
 	// Use this for initialization
 	void Start () {
 		this.rigidBody = this.GetComponent<Rigidbody2D>();
 		this.boxCollider = this.GetComponent<BoxCollider2D>();
-		this.marioFoots = this.GetComponentInChildren<MarioFoots>();
 		this.animator = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		this.checkGround ();
+
 		float axisX = Input.GetAxis("Horizontal");
 	
 		this.rigidBody.velocity = new Vector2(
@@ -36,30 +36,19 @@ public class Mario : MonoBehaviour {
 		bool jump = Input.GetKey (KeyCode.Space);
 		
 		if (jump && this.isGrounded) {
-			this.isGrounded = false;
 			this.rigidBody.AddForce(new Vector2(0F, this.jumpForce));
-		}
-	}
-
-	void OnCollisionEnter2D(Collision2D collision) {
-		GameObject collisionObject = collision.gameObject;
-
-		if(collisionObject.tag == "Mushroom") {
-			this.Grow ();
 		}
 	}
 
 	void Grow() {
 		this.size = "Big";
 		this.SetBigCollider("Stand");
-		this.marioFoots.SetBigCollider("Stand");
 		this.animator.SetTrigger("Grow");
 	}
 
 	void Shrink() {
 		this.size = "Small";
 		this.SetSmallCollider();
-		this.marioFoots.SetSmallCollider ();
 		this.animator.SetTrigger("Shrink");
 	}
 
@@ -89,5 +78,35 @@ public class Mario : MonoBehaviour {
 		} else {
 			Destroy (this.gameObject);
 		}
+	}
+
+	public void newMushroom() {
+		if (this.size == "Small") {
+			this.Grow ();
+		}
+	}
+
+	void checkGround() {
+		Vector2 raycastOrigin;
+		float raycastDist;
+
+		raycastOrigin.y = this.transform.position.y - (this.boxCollider.size.y / 2) - 1F;
+		raycastOrigin.x = this.transform.position.x - (this.boxCollider.size.x / 2);
+		raycastDist = this.boxCollider.size.x;
+
+		RaycastHit2D rcHit = Physics2D.Raycast (
+			raycastOrigin,
+			Vector2.right,
+			raycastDist
+		);
+
+		if (rcHit.collider == null) {
+			this.isGrounded = false;
+			this.animator.SetBool("IsGrounded", false);
+		} else {
+			this.isGrounded = true;
+			this.animator.SetBool("IsGrounded", true);
+		}
+
 	}
 }
