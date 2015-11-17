@@ -82,4 +82,12 @@ public class Mario : MonoBehaviour {
 
 		this.boxCollider.size = colliderSize;
 	}
+
+	public void Damage() {
+		if (this.size == "Big") {
+			this.Shrink ();
+		} else {
+			Destroy (this.gameObject);
+		}
+	}
 }
