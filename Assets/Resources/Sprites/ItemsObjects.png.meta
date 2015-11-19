@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 7ded58a8d656554429a4be80fd08ab86
-timeCreated: 1447651846
+timeCreated: 1447806956
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: Mushroom
+    21300002: ItemsObjects_0
+    21300004: ItemsObjects_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,6 +60,26 @@ TextureImporter:
         y: 320
         width: 16
         height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ItemsObjects_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ItemsObjects_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 184
+        width: 8
+        height: 8
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

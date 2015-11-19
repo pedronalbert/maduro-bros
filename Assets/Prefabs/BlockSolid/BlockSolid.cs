@@ -16,4 +16,8 @@ public class BlockSolid : MonoBehaviour {
 	public void DestroyBlock() {
 		Destroy(gameObject);
 	}
+
+	public void AnimateUp() {
+		
+	}
 }

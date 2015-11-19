@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Mushroom : MonoBehaviour {
+public class ItemMarioDetection : MonoBehaviour {
 	private GameObject player;
 	private PlayerScript playerScript;
+	public string itemName;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,7 @@ public class Mushroom : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.gameObject.tag == "Player") {
-			this.playerScript.OnItemCollected("Mushroom");
+			this.playerScript.OnItemCollected(this.itemName);
 			Destroy(this.gameObject);
 		}
 	}
