@@ -24,7 +24,7 @@ public class PatrolScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if (this.isPatroling) {
-			if (this.rigidBody.velocity.x == 0) {
+			if (this.rigidBody.velocity.x >= -1F && this.rigidBody.velocity.x <= 1F) {
 				this.ChangeDirection ();
 			} else {
 				if (this.patrolLimits) {

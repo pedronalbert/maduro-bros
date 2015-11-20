@@ -20,7 +20,7 @@ public class GoombaHitArea : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (this.goombaScript.isAlive) {
 			if (collision.gameObject.tag == "Player" ) {
-				if(this.playerScript.isInvulnerable == false) {
+				if(collision.gameObject.transform.position.y > this.transform.position.y) {
 					this.ImpulseMarioUp();
 					this.goombaScript.KillShrinked();
 				}

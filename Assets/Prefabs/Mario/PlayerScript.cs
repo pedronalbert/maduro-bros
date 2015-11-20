@@ -21,14 +21,16 @@ public class PlayerScript : MonoBehaviour {
 	private float timeBetweenJumps = 0.20F;
 	private float invulnerableTime = 3F;
 	private float lastTimeFire = -1;
-	private float timeBetweenFire = 0.5F;
-	private float fireParticleSpeed = 175F;
+	private float timeBetweenFire = 0.25F;
+	private float fireParticleSpeed = 200F;
+	private GameStatsScript gameStatsScript;
 	
 	// Use this for initialization
 	void Start () {
 		this.rigidBody = this.GetComponent<Rigidbody2D>();
 		this.boxCollider = this.GetComponent<BoxCollider2D>();
 		this.animator = this.GetComponent<Animator>();
+		this.gameStatsScript = GameObject.Find("GameStats").GetComponent<GameStatsScript>();
 
 		if(this.size == "Big") {
 			this.Grow();
@@ -158,6 +160,7 @@ public class PlayerScript : MonoBehaviour {
 	public void OnItemCollected(string name) {
 		if (name == "Mushroom") {
 			this.Grow();
+			this.gameStatsScript.AddScore(1000);
 		} else if (name == "FireFlower") {
 			this.Grow();
 			this.SetSkin("Fire");

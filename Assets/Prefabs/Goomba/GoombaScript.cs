@@ -11,6 +11,7 @@ public class GoombaScript : MonoBehaviour {
 	private PlayerScript playerScript;
 	private Rigidbody2D rigidBody;
 	private PatrolScript patrolScript;
+	private GameStatsScript gameStatsScript;
 
 	// Use this for initialization
 	void Start () {
@@ -26,10 +27,12 @@ public class GoombaScript : MonoBehaviour {
 		this.rigidBody = this.GetComponent<Rigidbody2D> ();
 		this.boxCollider = this.GetComponent<BoxCollider2D>();
 		this.patrolScript = this.GetComponent<PatrolScript> ();
+		this.gameStatsScript = GameObject.Find("GameStats").GetComponent<GameStatsScript>();
 	}
 
 	public void KillShrinked() {
 		this.isAlive = false;
+		this.gameStatsScript.AddScore(100);
 		this.animator.SetTrigger("Crushed");
 		this.boxCollider.size = new Vector2 (
 			this.boxCollider.size.x,
@@ -47,6 +50,7 @@ public class GoombaScript : MonoBehaviour {
 
 	void KillToUp(string direction) {
 		this.isAlive = false;
+		this.gameStatsScript.AddScore(100);
 		this.boxCollider.enabled = false;
 
 		this.transform.Rotate(new Vector3(0, 0, 180F));
@@ -70,7 +74,8 @@ public class GoombaScript : MonoBehaviour {
 		if (this.isAlive) {
 			if (
 				(collider.gameObject.tag == "Player" && this.playerScript.aura == "Star") ||
-				(collider.gameObject.tag == "MarioFireBall")
+				(collider.gameObject.tag == "MarioFireBall") ||
+				(collider.gameObject.tag == "KoopaShell")
 			) {
 				this.patrolScript.StopPatrol();
 
@@ -80,6 +85,7 @@ public class GoombaScript : MonoBehaviour {
 					this.KillToUp("Left");
 				}
 			}
+
 		}
 	}
 

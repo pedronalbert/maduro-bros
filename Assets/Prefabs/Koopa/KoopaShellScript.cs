@@ -3,7 +3,6 @@ using System.Collections;
 
 public class KoopaShellScript : MonoBehaviour {
 	public bool isAlive = true;
-	public bool playerIsInside = false;
 	public float killUpForce = 10000F;
 	
 	private GameObject player;
@@ -11,6 +10,7 @@ public class KoopaShellScript : MonoBehaviour {
 	private BoxCollider2D boxCollider;
 	private Rigidbody2D rigidBody;
 	private PatrolScript patrolScript;
+	private BoxCollider2D damageAreaBc;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +19,7 @@ public class KoopaShellScript : MonoBehaviour {
 		this.boxCollider = this.GetComponent<BoxCollider2D>();
 		this.rigidBody = this.GetComponent<Rigidbody2D>();
 		this.patrolScript = this.GetComponent<PatrolScript>();
+		this.damageAreaBc = this.transform.FindChild("DamageArea").gameObject.GetComponent<BoxCollider2D>();
 
 		Physics2D.IgnoreCollision(
 			this.boxCollider,
@@ -34,24 +35,20 @@ public class KoopaShellScript : MonoBehaviour {
 	public void OnPlayerHit() {
 		if(this.rigidBody.velocity.x >= -1F && this.rigidBody.velocity.x <= 1F) {
 			if(this.player.transform.position.x < this.transform.position.x) {
-				//impulse to right
 				this.patrolScript.patrolVelocity = Mathf.Abs(this.patrolScript.patrolVelocity);
-				this.patrolScript.InitPatrol();
 			} else {
 				this.patrolScript.patrolVelocity = Mathf.Abs(this.patrolScript.patrolVelocity) * -1;
-				this.patrolScript.InitPatrol();
 			}
+			this.damageAreaBc.enabled = true;
+			this.patrolScript.InitPatrol();
 		} else {
+			this.damageAreaBc.enabled = false;
 			this.patrolScript.StopPatrol();
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (this.isAlive) {
-			if(collider.gameObject.tag == "Player") {
-				this.playerIsInside = true;
-			}
-
 			if (
 				(collider.gameObject.tag == "Player" && this.playerScript.aura == "Star") ||
 				(collider.gameObject.tag == "MarioFireBall")
@@ -67,12 +64,6 @@ public class KoopaShellScript : MonoBehaviour {
 		}
 	}
 
-
-	void OnTriggerExit2D(Collider2D collider) {
-		if(collider.gameObject.tag == "Player") {
-			this.playerIsInside = false;
-		}
-	}
 
 	void KillToUp(string direction) {
 		this.isAlive = false;
