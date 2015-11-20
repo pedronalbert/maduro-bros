@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EvilMushroom : MonoBehaviour {
+public class GoombaScript : MonoBehaviour {
 	public bool isAlive = true;
-	public bool playerIsInside;
 	public float killUpForce = 10000F;
 
 	private Animator animator;
@@ -69,10 +68,6 @@ public class EvilMushroom : MonoBehaviour {
 	//Collision con aura o proyectil del player
 	void OnTriggerEnter2D(Collider2D collider) {
 		if (this.isAlive) {
-			if(collider.gameObject.tag == "Player") {
-				this.playerIsInside = true;
-			}
-
 			if (
 				(collider.gameObject.tag == "Player" && this.playerScript.aura == "Star") ||
 				(collider.gameObject.tag == "MarioFireBall")
@@ -85,13 +80,6 @@ public class EvilMushroom : MonoBehaviour {
 					this.KillToUp("Left");
 				}
 			}
-		}
-	}
-
-
-	void OnTriggerExit2D(Collider2D collider) {
-		if(collider.gameObject.tag == "Player") {
-			this.playerIsInside = false;
 		}
 	}
 

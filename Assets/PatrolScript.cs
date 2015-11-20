@@ -38,6 +38,8 @@ public class PatrolScript : MonoBehaviour {
 	void ChangeDirection () {
 		this.patrolVelocity *= -1;
 
+		this.transform.Rotate(new Vector3(0, 180F, 0));
+
 		this.rigidBody.velocity = new Vector2 (
 			this.patrolVelocity,
 			this.rigidBody.velocity.y

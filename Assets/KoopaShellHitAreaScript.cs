@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EvilMushroomHead : MonoBehaviour {
-	public bool playerIsInside = false;
-
-	private EvilMushroom evilMushroomScript;
+public class KoopaShellHitAreaScript : MonoBehaviour {
+	private KoopaShellScript koopaShellScript;
 	private BoxCollider2D boxCollider;
 	private GameObject player;
 	private PlayerScript playerScript;
@@ -13,7 +11,7 @@ public class EvilMushroomHead : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.evilMushroomScript = this.transform.parent.GetComponent<EvilMushroom> ();
+		this.koopaShellScript = this.transform.parent.GetComponent<KoopaShellScript> ();
 		this.boxCollider = this.GetComponent<BoxCollider2D> ();
 		this.player = GameObject.FindWithTag ("Player");
 		this.playerScript = this.player.GetComponent<PlayerScript>();
@@ -22,27 +20,23 @@ public class EvilMushroomHead : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (this.evilMushroomScript.isAlive) {
-			/* Si mario entro en la zona de daño
-			 * y aun sigue adentro quitamos el collider para
-			 * evitar que lo mate con el cuerpo 
-
-			 * Si tiene la estrella lo quitamos para evitar
-			 * una muerte por aplastamiento
-			 */
-			if (this.evilMushroomScript.playerIsInside || this.playerScript.aura == "Star") {
+		if (this.koopaShellScript.isAlive) {
+			if(this.playerScript.aura == "Star" || this.koopaShellScript.playerIsInside) {
 				this.boxCollider.enabled = false;
 			} else {
-				this.boxCollider.enabled = true;
+				if(this.playerScript.isInvulnerable) {
+					this.boxCollider.enabled = false;
+				} else {
+					this.boxCollider.enabled = true;
+				}
 			}
 		}
 	}
 
 	void OnTriggerEnter2D(Collider2D collision) {
-		if (this.evilMushroomScript.isAlive) {
+		if (this.koopaShellScript.isAlive) {
 			if (collision.gameObject.tag == "Player" ) {
-				this.boxCollider.enabled = false;
-				this.evilMushroomScript.KillShrinked();
+				this.koopaShellScript.OnPlayerHit();
 				this.ImpulseMarioUp();
 			}
 		}
@@ -54,5 +48,4 @@ public class EvilMushroomHead : MonoBehaviour {
 		this.playerRb.velocity = new Vector2(this.playerRb.velocity.x, 0F);
 		this.playerRb.AddForce(new Vector2(0F, force));
 	}
-
 }
